@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class DBManager {
-    private static final String url = "jdbc:mysql://45.76.65.63:3306/library_manager?useSSL=true&characterEncoding=utf-8";
+    private static final String url = "jdbc:mysql://66.98.124.133:3306/webhomework?useSSL=true&characterEncoding=utf-8";
     private static final String name = "com.mysql.jdbc.Driver";
-    private static final String username = "library_mysql_manager";
-    private static final String password = "library_123456";
+    private static final String username = "root";
+    private static final String password = "123456lys";
     public Connection connection = null;
     public PreparedStatement preparedStatement = null;
 
