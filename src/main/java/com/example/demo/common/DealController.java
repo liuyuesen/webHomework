@@ -56,7 +56,7 @@ public class DealController {
             //-----------下边是做第一次更改--------------------------------------
             String sql="update "+loro+" set status = "+st+" , pre_statu = "+pre_status+",opinion1=" +opinion1+
                     " ,opinion2= "+opinion2+",opinion3="+opinion3+" where id = "+did+";";
-            System.out.print(sql);
+            //System.out.print(sql);
             DBManager dbManager1 = new DBManager(sql);
             dbManager1.preparedStatement.executeUpdate();
             //------------第一次改完了！！！！！！！！！！！！！！！！！！！！
@@ -83,7 +83,7 @@ public class DealController {
                 DBManager dbManager3 = new DBManager(sqlfinal);
                 dbManager3.preparedStatement.executeUpdate();
                 dbManager3.close();
-                System.out.print(sqlfinal);
+                //System.out.print(sqlfinal);
             }
             flag=true;
             dbManager.close();
