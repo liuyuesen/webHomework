@@ -5,6 +5,9 @@ import com.example.demo.tool.DBManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,14 +19,16 @@ import java.sql.ResultSet;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class JudgeAndSearch {
 
     @RequestMapping(value = "/outDeals", method = RequestMethod.POST)
-    public ArrayList<OutBean> outDeals(@RequestParam(value = "id", required = true) String id,
-                        @RequestParam(value = "status", required = true) String status) {
+    public ArrayList<OutBean> outDeals(@RequestBody JS js/*@RequestParam(value = "id", required = true) String id,
+                        @RequestParam(value = "status", required = true) String status*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        String status = js.getStatus();
+        String id = js.getId();
         String error = "no error";
         String status_temp = null;
         if(status.equals("department_manager")){
@@ -87,10 +92,12 @@ public class JudgeAndSearch {
     }
 
     @RequestMapping(value = "/leaveDeals", method = RequestMethod.POST)
-    public ArrayList<LeaveBean> leaveDeals(@RequestParam(value = "id", required = true) String id,
-                                       @RequestParam(value = "status", required = true) String status) {
+    public ArrayList<LeaveBean> leaveDeals(@RequestBody JS js/*@RequestParam(value = "id", required = true) String id,
+                                       @RequestParam(value = "status", required = true) String status*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        String status = js.getStatus();
+        String id = js.getId();
         String[] s = {"年假", "事假", "病假",  "婚假",  "产假"};
         String status_temp = null;
         if(status.equals("department_manager")){
@@ -282,5 +289,27 @@ class OutBean {
     }
     public void setdays(){
         this.days = (int)((time_end.getTime()-time_start.getTime())/(24*60*60*1000));
+    }
+}
+
+
+class JS{
+    private String id;
+    private String status;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -2,10 +2,7 @@ package com.example.demo.common;
 
 import com.example.demo.tool.DBManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +13,8 @@ import java.sql.ResultSet;
 
 
 @RestController
+@CrossOrigin
+@ResponseBody
 public class Outcontroller {
     private String status;
     private String password;
@@ -25,14 +24,22 @@ public class Outcontroller {
     private Integer days;
 
     @RequestMapping(value = "/out", method = RequestMethod.POST)
-    public boolean out(@RequestParam(value = "status", required = true) String status,
+    public boolean out(@RequestBody JS_2 js/*@RequestParam(value = "status", required = true) String status,
                         @RequestParam(value = "id", required = true) String id,
                         @RequestParam(value = "reason", required = true) String reason,
                         @RequestParam(value = "time_start", required = true) Date time_start,
                         @RequestParam(value = "time_end", required = true) Date time_end,
-                         @RequestParam(value = "days", required = true) Integer days) {
+                         @RequestParam(value = "days", required = true) Integer days*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        String id = js.getId();
+        String status = js.getStatus();
+        Date time_start = js.getTime_start();
+        Date time_end = js.getTime_end();
+        int days = js.getDays();
+        String reason = js.getReason();
+
+
         String error = "no error";
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
@@ -62,15 +69,22 @@ public class Outcontroller {
 
 
     @RequestMapping(value = "/leave", method = RequestMethod.POST)
-    public boolean leave(@RequestParam(value = "status", required = true) String status,
+    public boolean leave(@RequestBody JS_2 js/*@RequestParam(value = "status", required = true) String status,
                          @RequestParam(value = "id", required = true) String id,
                          @RequestParam(value = "item",required = true) String item,
                          @RequestParam(value = "reason", required = true) String reason,
                          @RequestParam(value = "time_start", required = true) Date time_start,
                          @RequestParam(value = "time_end", required = true) Date time_end,
-                         @RequestParam(value = "days", required = true) Integer days) {
+                         @RequestParam(value = "days", required = true) Integer days*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        String id = js.getId();
+        String status = js.getStatus();
+        Date time_start = js.getTime_start();
+        Date time_end = js.getTime_end();
+        int days = js.getDays();
+        String reason = js.getReason();
+        String item = js.getItem();
         String error = "no error";
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
@@ -110,3 +124,72 @@ public class Outcontroller {
     }
 
 }
+
+class JS_2{
+    private String id;
+    private String status;
+    private Date time_start;
+    private Date time_end;
+    private int days;
+    private String reason;
+    private String item;
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTime_start(Date time_start) {
+        this.time_start = time_start;
+    }
+
+    public void setTime_end(Date time_end){
+        this.time_end = time_end;
+    }
+
+    public void setItem(String item){
+        this.item = item;
+    }
+
+    public void setDays(int days){
+        this.days = days;
+    }
+
+    public void setReason(String reason){
+        this.reason = reason;
+    }
+
+    public Date getTime_end() {
+        return time_end;
+    }
+
+    public Date getTime_start() {
+        return time_start;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getItem() {
+        return item;
+    }
+}
+
+
