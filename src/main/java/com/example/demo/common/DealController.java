@@ -9,14 +9,15 @@ import java.util.Date;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class DealController {
     @RequestMapping(value = "/deals", method = RequestMethod.POST)
-    public Boolean dealcontroll(@RequestParam(value = "did", required = true) String did,
-                                @RequestParam(value = "function", required = true) int function,
-                                @RequestParam(value = "status", required = true) String status,
-                                @RequestParam(value = "admission", required = true) String admission,
-                                @RequestParam(value = "description", required = true) String description) {
+    public Boolean dealcontroll(@RequestBody deal js) {
+        String did=js.getDid();
+        int function=js.getFunction();
+        String status=js.getStatus();
+        String admission=js.getAdmission();
+        String description=js.getDescription();
         boolean flag = false;
         //leave or out
         String loro = null;
@@ -99,4 +100,52 @@ public class DealController {
         }
         return flag;
     }
+}
+class deal{
+    private String did;
+    private int function;
+    private String status;
+    private String admission;
+    private String description;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getFunction() {
+        return function;
+    }
+
+    public String getAdmission() {
+        return admission;
+    }
+
+    public String getDid() {
+        return did;
+    }
+
+    public void setAdmission(String admission) {
+        this.admission = admission;
+    }
+
+    public void setDid(String did) {
+        this.did = did;
+    }
+
+    public void setFunction(int function) {
+        this.function = function;
+    }
+
 }

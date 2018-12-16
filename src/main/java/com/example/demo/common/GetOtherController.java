@@ -10,11 +10,12 @@ import java.util.Date;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class GetOtherController {
     @RequestMapping(value = "/getOthers", method = RequestMethod.POST)
-    public ArrayList<GetOthersBean> login(@RequestParam(value = "id", required = true) String userId,
-                              @RequestParam(value = "time", required = true) String d) {
+    public ArrayList<GetOthersBean> login(@RequestBody Getother js) {
+        String userId = js.getId();
+        Date time = js.getTime();
         Date date=new Date();
         ArrayList<GetOthersBean> flist=new ArrayList<GetOthersBean>();
         ArrayList<String> idlist=getid(userId);
@@ -89,6 +90,26 @@ return flist;
             System.out.print(e);
         }
         return getOthersBean;
+    }
+}
+class Getother{
+    private String id;
+    private Date time;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date date) {
+        this.time =date ;
     }
 }
 //返回的json数据类

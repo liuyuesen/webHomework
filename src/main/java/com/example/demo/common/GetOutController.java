@@ -12,12 +12,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class GetOutController {
     @RequestMapping(value = "/getOut", method = RequestMethod.POST)
-    public ArrayList<GetOutBean> getout(@RequestParam(value = "id", required = true) String userId,
-                        @RequestParam(value = "status", required = true) String statu) {
-            ArrayList<GetOutBean> leavelist = getleave(userId);
+    public ArrayList<GetOutBean> getout(@RequestBody Getout js) {
+        String userId = js.getId();
+        String statu = js.getStatus();
+        ArrayList<GetOutBean> leavelist = getleave(userId);
             ArrayList<GetOutBean> outlist = getout(userId);
             for(int i = 0 ; i < outlist.size() ; i++){
                 leavelist.add(outlist.get(i));
@@ -174,6 +175,26 @@ return leavelist;
             System.out.print(e);
         }
         return outlist;
+    }
+}
+class Getout{
+    private String id;
+    private String status;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }
 class GetOutBean{

@@ -11,14 +11,15 @@ import java.util.Date;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class GetPunchController {
 
     @RequestMapping(value = "/getPunch", method = RequestMethod.POST)
-    public GetPunchBean login(@RequestParam(value = "id", required = true) String userId,
-                        @RequestParam(value = "status", required = true) String statu) {
+    public GetPunchBean login(@RequestBody Getpunch js) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        String userId = js.getId();
+        String statu = js.getStatus();
         GetPunchBean getPunchBean=new GetPunchBean();
         //设置判断是否打卡的Bool变量
         boolean res = false;
@@ -71,7 +72,26 @@ public class GetPunchController {
     }
 
 }
+class Getpunch{
+    private String id;
+    private String status;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
 class GetPunchBean {
     private Date punch_time ;
     private String description;
