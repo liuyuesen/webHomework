@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 
 @RestController
 @CrossOrigin
-
+@ResponseBody
 public class LoginController {
     private String userName;
     private String password;
@@ -25,8 +25,9 @@ public class LoginController {
 //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public LoginBean login(@RequestParam(value = "id", required = true) String userName,
-                           @RequestParam(value = "passwords", required = true) String password) {
+    public LoginBean login(@RequestBody JS js) {
+        String userName=js.getId();
+        String password=js.getPasswords();
         LoginBean loginBean = new LoginBean();
         String sql = "SELECT password,category FROM worker where id = " + userName + ";";
         try {
@@ -68,7 +69,26 @@ public class LoginController {
         }
     }
 }
+class JS{
+    private String id;
+    private String passwords;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPasswords() {
+        return passwords;
+    }
+
+    public void setPasswords(String passwords) {
+        this.passwords = passwords;
+    }
+}
 class LoginBean {
     private boolean result;
     private String status;
