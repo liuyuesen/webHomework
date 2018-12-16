@@ -26,52 +26,71 @@ public class LoginController {
 //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam(value = "id", required = true) String userName,
-                        @RequestParam(value = "passwords", required = true) String password) {
+    public LoginBean login(@RequestParam(value = "id", required = true) String userName,
+                           @RequestParam(value = "passwords", required = true) String password) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
-        String error = "no error";
-
-        String sql = "SELECT password FROM worker where id = " + userName + ";";
+        LoginBean loginBean = new LoginBean();
+        String sql = "SELECT password,category FROM worker where id = " + userName + ";";
         try {
             DBManager dbManager = new DBManager(sql);
             ResultSet result;
             String DBpassword = null;
+            int category = 4;
             result = dbManager.preparedStatement.executeQuery();
             while (result.next()) {
                 DBpassword = result.getString("password");
+                category = Integer.parseInt(result.getString("category"));
             }
             if (DBpassword.equals(password)) {
                 result.close();
                 dbManager.close();
-
-                return error;
+                loginBean.setResult(true);
+                loginBean.setStatus(getStatus(category));
+                return loginBean;
             }
         } catch (Exception e) {
-            error = e.toString();
         }
+        loginBean.setResult(false);
+        loginBean.setStatus("密码错误");
+        return loginBean;
+    }
 
-        return error;
+    private String getStatus(int number) {
+        switch (number) {
+            case 0:
+                return "staff";
+            case 1:
+                return "department_manager";
+            case 2:
+                return "deputy_general_manage";
+            case 3:
+                return "general_manager";
+            default:
+                return "error";
+        }
     }
 }
 
 class LoginBean {
-    private String userID;
-    private String password;
+    private boolean result;
+    private String status;
 
-    public String getPassword() {
-        return password;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 
-    public String getUserID() {
-        return userID;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public boolean getResult() {
+        return result;
     }
+
 }
+
