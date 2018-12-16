@@ -2,10 +2,7 @@ package com.example.demo.common;
 
 import ch.qos.logback.classic.boolex.GEventEvaluator;
 import com.example.demo.tool.DBManager;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.ArrayUtils;
 
 import java.sql.Date;
@@ -14,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
+
 public class GetOutController {
     @RequestMapping(value = "/getOut", method = RequestMethod.POST)
     public ArrayList<GetOutBean> getout(@RequestParam(value = "id", required = true) String userId,

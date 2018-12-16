@@ -1,15 +1,14 @@
 package com.example.demo;
 
 import com.example.demo.tool.DBManager;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 
 @RestController
+@CrossOrigin
+
 public class PunchController {
 
     @RequestMapping(value = "/punch", method = RequestMethod.POST)

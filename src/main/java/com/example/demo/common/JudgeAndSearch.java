@@ -3,10 +3,7 @@ package com.example.demo.common;
 
 import com.example.demo.tool.DBManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 
 @RestController
+@CrossOrigin
+
 public class JudgeAndSearch {
 
     @RequestMapping(value = "/outDeals", method = RequestMethod.POST)
