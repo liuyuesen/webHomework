@@ -28,8 +28,6 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public LoginBean login(@RequestParam(value = "id", required = true) String userName,
                            @RequestParam(value = "passwords", required = true) String password) {
-//        userName = httpServletRequest.getParameter("id");
-//        password = httpServletRequest.getParameter("passwords");
         LoginBean loginBean = new LoginBean();
         String sql = "SELECT password,category FROM worker where id = " + userName + ";";
         try {
