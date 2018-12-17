@@ -23,7 +23,7 @@ import java.sql.ResultSet;
 public class JudgeAndSearch {
 
     @RequestMapping(value = "/outDeals", method = RequestMethod.POST)
-    public ArrayList<OutBean> outDeals(@RequestBody JS js/*@RequestParam(value = "id", required = true) String id,
+    public ArrayList<OutBean> outDeals(@RequestBody JS1 js/*@RequestParam(value = "id", required = true) String id,
                         @RequestParam(value = "status", required = true) String status*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
@@ -92,7 +92,7 @@ public class JudgeAndSearch {
     }
 
     @RequestMapping(value = "/leaveDeals", method = RequestMethod.POST)
-    public ArrayList<LeaveBean> leaveDeals(@RequestBody JS js/*@RequestParam(value = "id", required = true) String id,
+    public ArrayList<LeaveBean> leaveDeals(@RequestBody JS1 js/*@RequestParam(value = "id", required = true) String id,
                                        @RequestParam(value = "status", required = true) String status*/) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
@@ -293,7 +293,7 @@ class OutBean {
 }
 
 
-class JS{
+class JS1{
     private String id;
     private String status;
 

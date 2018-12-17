@@ -4,6 +4,7 @@ import com.example.demo.tool.DBManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,8 +17,11 @@ public class CheckController {
     String id=js.getId();
     String status=js.getStatus();
     Date date=new Date();
+    //String da =(1900+date.getYear())+"-"+(1+date.getMonth())+"-"+(16+date.getDay());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String dateNowStr = sdf.format(date);
     String sql = "select A.wid ,A.stime ,W.work,W.name from attendance A ,worker W where to_days(A.stime)" +
-            "=to_days(\""+date+"\");";
+            "=to_days(\""+dateNowStr+"\")and A.wid=W.id;";
     System.out.print(sql);
     ArrayList<checkbeans> arrayList=new ArrayList<checkbeans>();
 

@@ -61,7 +61,7 @@ public class LoginController {
             case 1:
                 return "department_manager";
             case 2:
-                return "deputy_general_manage";
+                return "deputy_general_manager";
             case 3:
                 return "general_manager";
             default:

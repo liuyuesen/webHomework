@@ -3,8 +3,9 @@ package com.example.demo;
 import com.example.demo.tool.DBManager;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 @CrossOrigin
@@ -12,11 +13,22 @@ import java.sql.ResultSet;
 public class PunchController {
 
     @RequestMapping(value = "/punch", method = RequestMethod.POST)
-    public PunchBean Punch(@RequestParam(value = "id", required = true) String id,
-                           @RequestParam(value = "function", required = true) String function,
-                           @RequestParam(value = "status", required = true) String status,
-                           @RequestParam(value = "punch_date", required = true) Date punchDate) {
-        String sql = "Insert into attendance(wid) values (" + id + ");";
+    public PunchBean Punch(@RequestBody get js) {
+        String id=js.getId();
+        String function=js.getFunction();
+        String status=js.getStatus();
+        String punch_date=js.getPunch_date();
+        String sql=null;
+        java.util.Date date=new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateNowStr = sdf.format(date);
+        if(function.equals("1")){
+            sql = "Insert into attendance(wid,stime) values (" + id + ",'"+dateNowStr+"');";
+        }else if(function.equals("2")){
+            sql="update attendance set etime = '"+dateNowStr+"' where wid = "+id+" and stime ='"+dateNowStr+"';";
+        }
+System.out.print(sql);
+
         PunchBean punchBean = new PunchBean();
         boolean bool = true;
         try {
@@ -31,7 +43,44 @@ public class PunchController {
         return punchBean;
     }
 }
+class get{
+    private String id;
+    private String function;
+    private String status;
+    private String punch_date;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public String getPunch_date() {
+        return punch_date;
+    }
+
+    public void setPunch_date(String punch_date) {
+        this.punch_date = punch_date;
+    }
+}
 class PunchBean {
     private boolean result;
 

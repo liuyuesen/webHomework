@@ -46,7 +46,7 @@ public class Outcontroller {
         String time_s = df.format(time_start);
         String time_e = df.format(time_end);
         String status_temp = null;
-        if(status.equals("“department_manager")){
+        if(status.equals("department_manager")){
             status_temp = "1";
         }else if(status.equals("staff")){
             status_temp = "0";
@@ -91,7 +91,7 @@ public class Outcontroller {
         String time_s = df.format(time_start);
         String time_e = df.format(time_end);
         String status_temp = null;
-        if(status.equals("“department_manager")){
+        if(status.equals("department_manager")){
             status_temp = "1";
         }else if(status.equals("staff")){
             status_temp = "0";

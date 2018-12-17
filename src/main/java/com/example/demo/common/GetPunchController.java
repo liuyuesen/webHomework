@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,9 +16,10 @@ import java.util.Date;
 public class GetPunchController {
 
     @RequestMapping(value = "/getPunch", method = RequestMethod.POST)
-    public GetPunchBean login(@RequestBody Getpunch js) {
+    public ArrayList<GetPunchBean> login(@RequestBody Getpunch js) {
 //        userName = httpServletRequest.getParameter("id");
 //        password = httpServletRequest.getParameter("passwords");
+        ArrayList<GetPunchBean> al = new ArrayList<GetPunchBean>();
         String userId = js.getId();
         String statu = js.getStatus();
         GetPunchBean getPunchBean=new GetPunchBean();
@@ -44,13 +46,14 @@ public class GetPunchController {
                 getPunchBean.setDescription("未打卡");
                 getPunchBean.setPunch_time(date);
             }
+            al.add(getPunchBean);
             result.close();
             dbManager.close();
         } catch (Exception e) {
              System.out.print(e);
         }
 
-        return getPunchBean;
+        return al;
     }
     //判断两个日期是否相同的方法
     private static boolean isSameDate(Date date1, Date date2) {

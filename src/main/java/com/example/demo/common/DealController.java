@@ -28,7 +28,7 @@ public class DealController {
         }
         try {
             String sql1="select status from "+loro+" where id = "+did+";";
-            //System.out.print(sql1);
+            System.out.print(sql1);
             DBManager dbManager = new DBManager(sql1);
             ResultSet result;
             result = dbManager.preparedStatement.executeQuery();
